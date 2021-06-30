@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title> &#127746; Weather Forecast </title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+  <link href="style.css" rel="stylesheet">
+
+</head>
+<body>
+
+
+<!-- Nav bars -->
+<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+  <div class="container-fluid">
+      <a class="navbar-brand" href="index.html"><img alt ='logo' src="img/rsz_logo_green.png" width="110" height="50"><strong>Ontario</strong> Weather</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+  </div>
+      <div class="navbar-collapse collapse"  id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+     <a class="nav-link" href="index.html"><strong> Home </strong></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="method.html"><strong> Methodology </strong></a>
+          </li>
+    <li class="nav-item">
+            <a class="nav-link" href="product.html"><strong> Product </strong></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html"><strong> Contact </strong></a>
+          </li>
+        </ul>
+      </div>
+</nav>
+
+<div class="container-sm border ">
+    <div class="row welcome text-center">
+      <div class="col-12">
+    <h2 class="text-center" style="color: brown;">Methodology: How we did it</h2></div>
+    <div class="col-12"> <h4 class="text-justify" style="color: rgb(42, 165, 69);">PREPARING THE STUDY AREA </h4></div>
+    <h5 style="color: rgb(165, 46, 42);" >Weather Stations:</h5>
+    <p class="text-justify">Weather stations within Ontario and a 50km 
+      distance from the borders of Ontario were clipped for inclusion in the study area. 
+      The weather stations within 50km outside of the Ontario border were included 
+      in the study area to improve interpolation results near the edges of Ontario near Manitoba and Quebec.
+         </p>
+
+         <h5 class="text-justify" style="color: rgb(165, 46, 42);">Map tiles: </h5>
+         <p class="text-justify"> We created raster files automatically, using python scripts. 
+          After discovering that we could not query raster in Leaflet to fulfill our project purpose, 
+          we resolved to convert the raster to GeoJSON files which would then be used to query for temperature and wind speed information in the mapping application.</br>
+          Rectangle tiles were created in QGIS using the create grid tool. Setting horizontal and vertical spacing to 0.4 degrees
+          ,and the extent was set to –100,0,0,60 (left, right, bottom, top). 
+          Point grid tiles were also created, with horizontal and vertical spacing set to 
+          0.04 degrees and the extent set to –100.02, 0.02, 0.02, 60.02. 
+          The 0.02 was added to the point extents to offset their locations not to overlap the rectangle grids. </br>
+          The goal here was to have GeoJSON files for each respective tile, and each of those files would hold the points that fall within the extents of that tile. Each GeoJSON files' name was the extent of the corresponding rectangle tile concatenated with a "G" in front. These rectangle points and grids were then spatially joined to have the grid tile name added to 
+          the point grid layer, splitting the vector layers into separate GeoJSON files according to the grid tile name every hour.
+           </p>
+    
+    <div class="col-12"><h4 class="text-justify" style="color: rgb(42, 165, 69);" > RETRIEVING THE RAW WEATHER DATA </h4></div>
+    <p class="text-justify">We created two CSV files holding the latitude, 
+      longitude, and station codes of weather stations within our study area. 
+      These files would then be used in the ETL automation script. 
+      The script downloads hourly weather station data from this Government of 
+      Canada website: 'https://dd.weather.gc.ca/nowcasting/matrices/' using the python 
+      URLLIB module, unzips the downloaded file, and converts it to a text file.
+    </p>  
+  
+   <div class="col-12"><h4 class="text-justify" style="color: rgb(42, 165, 69);">PYQGIS </h4></div>
+    <p class="text-justify">
+      PyQGIS is a framework that allows you to run QGIS processes in python. To run QGIS processes in python, 
+      we needed to set our python interpreter to the python-qgis.bat interpreter. The same python script used in the ETL procedures above 
+      automates the interpolation process using PyQGIS by first converting the CSV file into a point layers, coverting the numerical columns stored
+      as string to double, adds new columns to store the temperature and wind numerical values. The script then performs a series of IDW interpolations
+      for both temperature and wind over the nine different regions of our study area.
+
+    </p>
+    
+    
+   <div class="col-12"><h4 class="text-justify" style="color: rgb(42, 165, 69);"> SPATIAL ANALYSIS </h4></div>
+    <p class="text-justify">
+      We split the province of Otario into nine sub-regions and generated interpolation models for all nine different sub-regions.  
+      This was done to improve the accuracy of the IDW interpolation model by limiting the interpolation model to 
+      only weather stations with a specific sub-region and not just general classification or aggregation of Weather station points.
+
+    </p>
+    <img alt ='IDW' src="img/IDW.png" style="margin-left: auto; margin-right: auto;" ></br>
+    
+    
+    <div class="col-12">
+      <p><h6 style="color: rgb(238, 10, 10);">Image showing Ontario divided into nine different regions</h6></p>
+        <h4 class="text-justify" style="color: rgb(42, 165, 69);"> WEB DEVELOPMENT  </h4></div>
+        <p class="text-justify">
+          The Ontario weather web application displays weather information for all of Ontario. 
+          It has been designed to retrieve weather information stored on the server and report 
+          the current weather details according to the selected location. 
+          This is done by retrieving the GeoJSON files previously created, using jQuery. 
+          The jQuery GET function is initiated after a user selects a point on the map. 
+          When a user selects a point on the map the latitude and longitude coordinates are recorded and roundedboth up and down to the nearest 
+          0.4 degrees to get the corresponding tile extents. These values would then be concatenated to match the format of the GeoJSON files 
+          That concatenated file name would then be used in the jQuery request, which will bring in the GeoJSON file. Before the GeoJSON file can be used for its information, 
+          a single point must be selected from this file. There are typically 100 points in each of these files, 
+          and the point closest to the selected point must be selected to take the data from. 
+          This is done using a for loop that iterates through each record in the file and calculates the distance between each point and the selected point, 
+          using Pythagorean theorem. The index number of the closet point is saved, and then used to retrieve the location specific weather data. 
+          Once the script knows which point is the closest the script will display the corresponding weather information. 
+          This information is the current temperature and wind, and the forecasted temperature and wind values for the next 5 hours.
+        </p>
+
+        <div class="col-12"><h4 class="text-justify" style="color: rgb(42, 165, 69);"> PROJECT RESULT </h4></div>
+    <p class="text-justify">
+      Using python for automating tasks turned out to work very well for our purposes. 
+      We were able to do all the pre-processing within a python script that automatically runs every hour (with task scheduler). 
+      This includes command line prompts (which originally, we were planning to do outside of python with PowerShell). 
+      The runtime of our entire python script takes approximately 80-90 seconds to complete. 
+      Once we set up our python pre-processing script, we created a batch file that runs this script at the top of every hour. 
+      If the script doesn’t find a corresponding URL, it will sleep for 5 minutes (and repeat until successful). 
+      The script runs smoothly, and most of the processing time revolves around the QGIS tools being run. 
+
+    </p> 
+  
+  </div></div>
+  
+<!--- Footer -->
+<footer>
+  <div class="footer fixed-bottom"></div>
+  <div class="container-fluid padding">
+  <div class="row text-center">
+    <div class="col-md-4">
+      <img alt ='logo' src="img/rsz_logo_green.png" width="110" height="50">
+    </div>
+    <div class="col-md-4">
+      <img alt ='logo' src="img/arubrum.png" width="110" height="50">
+    </div>
+    <div class="col-md-4">
+      <img src="img/fleminglogo.png" alt= "fleming">
+    </div>
+    <div class="col-12">
+      <hr class="light">
+      <h5>&copy; Fahrenheit 2021</h5>
+    </div>
+  </div>
+  </div>
+  </footer>
+
+</body>
+</html>
