@@ -17,7 +17,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
 integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <!-- JS for Ontario  polygon layer-->
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <link rel="stylesheet" type="text/css"
 href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css"
@@ -35,7 +36,22 @@ crossorigin="">
     <link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' rel='stylesheet' />
   <!-- Load Esri Leaflet from CDN -->
   <!-- Load Leaflet MarkerCluster and Esri Leaflet Cluster from CDN -->
-  
+   <!-- Load Leaflet MarkerCluster and Esri Leaflet Cluster from CDN -->
+   <link rel="stylesheet" type="text/css"
+   href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css"
+   integrity="sha512-BBToHPBStgMiw0lD4AtkRIZmdndhB6aQbXpX7omcrXeG2PauGBl2lzq2xUZTxaLxYz5IDHlmneCZ1IJ+P3kYtQ=="
+   crossorigin="">
+ <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css"
+   integrity="sha512-RLEjtaFGdC4iQMJDbMzim/dOvAu+8Qp9sw7QE4wIMYcg2goVoivzwgSZq9CsIxp4xKAZPKh5J2f2lOko2Ze6FQ=="
+   crossorigin="">
+ <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"
+   integrity="sha512-MQlyPV+ol2lp4KodaU/Xmrn+txc1TP15pOBF/2Sfre7MRsA/pB4Vy58bEqe9u7a7DczMLtU5wT8n7OblJepKbg=="
+   crossorigin=""></script>
+ <script src="https://unpkg.com/esri-leaflet-cluster@2.1.0/dist/esri-leaflet-cluster.js"
+   integrity="sha512-fEdNFHisleVtEYdLhW4Z2RsR7TN6hLutE/+O4D+skfTNY2rlHm8HOZARPWkdrFFy/+i2KjFxcZAKTUWaVfbV0g=="
+   crossorigin=""></script>
+
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
   <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
     <style type="text/css">
@@ -248,19 +264,14 @@ crossorigin="">
   L.control.layers(baseMaps, overlays, {collapsed:true}).addTo(map);
  
   lc.start();
- 
- 
-
-  
- 
-var themarker ;
+  var themarker ;
 map.on('click', function (e) {
   lat = e.latlng.lat;
   lon = e.latlng.lng;
 
   console.log("You clicked the map at LAT: "+ lat+" and LONG: "+lon );
   if (themarker) {
-    map.removeLayer(themarker);
+   map.removeLayer(themarker);
   }
   if (themarker != undefined) {
 					  map.removeLayer(themarker);
@@ -268,12 +279,6 @@ map.on('click', function (e) {
   themarker = new L.marker([lat,lon]).addTo(map); 
   //themarker = new L.Marker(e.latlng).addTo(map);
 });
-
-
-// user gets weather data by clicking a location on the tile map
- 
-
-// user gets weather data by clicking a location on the tile map
 map.on('click', function(layer){
 		  var latlng = map.mouseEventToLatLng(layer.originalEvent);
 		  console.log(latlng.lat + ', ' + latlng.lng);
@@ -287,27 +292,24 @@ map.on('click', function(layer){
 			  
 			  // returning json values help: https://idratherbewriting.com/learnapidoc/docapis_access_json_values.html
 		
-			  document.getElementById("start").innerHTML = "Marker coordinates: " + latlng.lat.toFixed(5) + ', ' + latlng.lng.toFixed(5) + "<br />" +
-			  "Current weather: " + obj.main.temp + " °C" +  "<br />" 
-        + "Feels like: " + obj.main.feels_like + " °C" + "<br />" 
-        + obj.weather[0].main + "<br />" + obj.weather[0].description + "<br />" 
-        + "Visibility: " + obj.visibility + " m" + "<br />" + "Wind Gust: " + obj.wind.gust + " km/h";
+			  document.getElementById("start").innerHTML = 
+        "Coordinates: " + latlng.lat.toFixed(5) + ', ' + latlng.lng.toFixed(5) + "<br />" +
+			  "Current Weather: " + Math.round(obj.main.temp) + " °C" +  "<br />" + 
+        "Feels like: " + Math.round (obj.main.feels_like) + " °C" + "<br />" + 
+        "Cloud: "  + obj.weather[0].description + "<br />" + 
+        "Visibility: " + obj.visibility + " m" + "<br />" + 
+        "Wind Speed: " + obj.wind.gust + " km/h";
 
-			  document.getElementById("temperature").innerHTML = obj.main.feels_like + " °C";
+			  document.getElementById("temperature").innerHTML = "Temperature: " + Math.round (obj.main.feels_like) + " °C";
 			  document.getElementById("temperature").style.fontSize = 35;
 			  document.getElementById("temperature").style.fontFamily = "Arial";
 		
-		var dynamictemp = obj.main.feels_like;
-			  if (dynamictemp < 0) {
-				document.getElementById("temperature").style.color = "navy";
-			  	document.getElementById("temperature").style.fontSize = 35;
-			  	document.getElementById("temperature").style.fontFamily = "Arial";}
-			  if (dynamictemp > 0) {
-				document.getElementById("temperature").style.color = "red";
-			  	document.getElementById("temperature").style.fontSize = 35;
-			  	document.getElementById("temperature").style.fontFamily = "Arial";}
+		
 			});
 		});
+
+   
+
 
 		
 
@@ -321,11 +323,11 @@ map.on('click', function(layer){
     
     
     <h4 style="font-size:1.5vw;"><p id="weather" style=" color:rgb(14, 2, 2);"> Weather Forecast</p></h4>
-    <h6 style="font-size: 1vw;" ><p id="pointClick" style=" color:rgb(14, 2, 2);"> Click On any Point for Weather Information</p></h6>
+    <h6 style="font-size: 1vw;" ><p id="pointClick" style=" color:rgb(12, 22, 161);"> Click On any Point for Weather Information</p></h6>
     <div>
-      <p id="start" style=" color:rgb(14, 2, 2);"></p>
+      <p id="start" style=" color:rgb(14, 2, 2); font-size:1vw;"></p>
       </div>
-    <div id="temperature" style=" color:rgb(14, 2, 2);"></div>
+    <div id="temperature" style=" color:rgb(199, 8, 8); font-size:2.5vw;"> </div>
     </div>
     
   </div>
