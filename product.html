@@ -288,7 +288,10 @@ map.on('click', function(layer){
 			  // returning json values help: https://idratherbewriting.com/learnapidoc/docapis_access_json_values.html
 		
 			  document.getElementById("start").innerHTML = "Marker coordinates: " + latlng.lat.toFixed(5) + ', ' + latlng.lng.toFixed(5) + "<br />" +
-			  "Current weather: " + obj.main.temp + " °C" +  "<br />" + "Feels like: " + obj.main.feels_like + " °C" + "<br />" + obj.weather[0].main + "<br />" + obj.weather[0].description + "<br />" + "Visibility: " + obj.visibility + " m" + "<br />" + "Wind gust: " + obj.wind.gust + " km/h";
+			  "Current weather: " + obj.main.temp + " °C" +  "<br />" 
+        + "Feels like: " + obj.main.feels_like + " °C" + "<br />" 
+        + obj.weather[0].main + "<br />" + obj.weather[0].description + "<br />" 
+        + "Visibility: " + obj.visibility + " m" + "<br />" + "Wind Gust: " + obj.wind.gust + " km/h";
 
 			  document.getElementById("temperature").innerHTML = obj.main.feels_like + " °C";
 			  document.getElementById("temperature").style.fontSize = 35;
