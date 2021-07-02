@@ -30,6 +30,13 @@
     border-radius: 4px;
     resize: vertical;
   }
+  input[type=email], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+  }
   
   label {
     padding: 12px 12px 12px 0;
@@ -121,13 +128,13 @@
     We will try our best to answer all your inquries!</p>
   </div>
   <div class="container">
-    <form action="validate.php" method="POST" id="my-form">
+    <form action="https://formspree.io/f/xwkaqrpl" method="POST" id="my-form">
       <div class="row">
         <div class="col-25">
           <label for="fname">First Name</label>
         </div>
         <div class="col-75">
-          <input type="text" id="fname" name="firstName" placeholder="Your name..">
+          <input type="text" id="fname" name="firstName" placeholder="Your name.." required >
         </div>
       </div>
       <div class="row">
@@ -135,15 +142,15 @@
           <label for="lname">Last Name</label>
         </div>
         <div class="col-75">
-          <input type="text" id="lname" name="lastName" placeholder="Your last name..">
+          <input type="text" id="lname" name="lastName" placeholder="Your last name.." required >
         </div>
       </div>
       <div class="row">
         <div class="col-25">
-          <label for="lname">Email</label>
+          <label for="email">Email</label>
         </div>
         <div class="col-75">
-          <input type="text" id="fname" name="firstName" placeholder="Your Email..">
+          <input type="email" id="email" name="email" placeholder="Your Email.." required>
         </div>
       </div>
       <div class="row">
@@ -151,7 +158,7 @@
           <label for="lname">Phone Number</label>
         </div>
         <div class="col-75">
-          <input type="text" id="lname" name="phoneNumber" placeholder="Your Phone Number..">
+          <input type="text" id="lname" name="phoneNumber" placeholder="Your Phone Number.." required>
         </div>
       </div>
      
@@ -160,7 +167,7 @@
           <label for="subject">Message</label>
         </div>
         <div class="col-75">
-          <textarea id="subject" name="message" placeholder="Write something.." style="height:200px"></textarea>
+          <textarea id="subject" name="message" placeholder="Write something.." style="height:200px" required></textarea>
         </div>
       </div>
       <div class="row">
