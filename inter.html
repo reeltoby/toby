@@ -71,20 +71,75 @@
              extracting the data and stored them in PostGIS postgresql
              databse. This data contains other information and details like precipitation, humidity, but 
              our main focus is on wind speed and temperature. The information automatically saved in the database 
-             has temperature and wind speed record for all the weather stations in Ontario. The database was then connected
-             to QGIS and the data brought over as a layer for spatial analysis to decipher the best interpolation methods.
+             has temperature and wind speed record for all the weather stations in Ontario. A coonection was then established from
+             QGIS destop application to the postgresql databse on our desktop and the data brought over as a layer for spatial analysis to decipher the best interpolation methods.
+             This connection process led to installation of Geoserver(using apache tomcat) and postgresql in the web server hoping this 
+             would work seamlessly.
 
            </p>
     
     <div class="col-12"><h4 class="text-justify" style="color: rgb(42, 165, 69);" > SPATIAL ANALYSIS </h4></div>
-    <p class="text-justify">We created two CSV files holding the latitude, 
-      longitude, and station codes of weather stations within our study area. 
-      These files would then be used in the ETL automation script. 
-      The script downloads hourly weather station data from this Government of 
-      Canada website: 'https://dd.weather.gc.ca/nowcasting/matrices/' using the python 
-      URLLIB module, unzips the downloaded file, and converts it to a text file.
-    </p>  
-  
+     
+    <h5 style="color: rgb(165, 46, 42);" >Interpolation Methods: </h5>
+    <p class="text-justify">
+    Several interpolation methods were considered and tested for accuracy. We agreed on testing TIN, B-Spline, IDW,Natural Neighbour
+
+    </p>
+         <div class="row">
+            <div class="column">
+              <img src="img/natN.jpg" alt="Can" style="width:70%">
+              <p><h6 style="color: rgb(238, 10, 10);">Natural Neighbour Interpolation Method</h6></p>
+            </div>
+            <div class="column">
+              <img src="img/natNComp.jpg" alt="On" style="width:70%">
+              <p><h6 style="color: rgb(238, 10, 10);">Derived wind Results compared with the Original weather station Data</h6></p>
+            </div>
+           
+          </div>
+          <div class="row">
+            <div class="column">
+              <img src="img/nearest.jpg" alt="Can" style="width:70%">
+              <p><h6 style="color: rgb(238, 10, 10);">Nearest Neighbour Interpolation Method</h6></p>
+            </div>
+            <div class="column">
+              <img src="img/nearestC.jpg" alt="On" style="width:70%">
+              <p><h6 style="color: rgb(238, 10, 10);">Derived wind Results compared with the Original weather station Data</h6></p>
+            </div>
+           
+          </div>
+          <div class="row">
+            <div class="column">
+              <img src="img/tin.jpg" alt="Can" style="width:70%">
+              <p><h6 style="color: rgb(238, 10, 10);">TIN Interpolation Method</h6></p>
+            </div>
+            <div class="column">
+              <img src="img/tinC.jpg" alt="On" style="width:70%">
+              <p><h6 style="color: rgb(238, 10, 10);">Derived wind Results compared with the Original weather station Data</h6></p>
+            </div>
+           
+          </div>
+          <div class="row">
+            <div class="column">
+              <img src="img/BSPLINE.jpg" alt="Can" style="width:70%">
+              <p><h6 style="color: rgb(238, 10, 10);">B-SPline Interpolation Method</h6></p>
+            </div>
+            <div class="column">
+              <img src="img/bsplineC.jpg" alt="On" style="width:70%">
+              <p><h6 style="color: rgb(238, 10, 10);">Derived wind Results compared with the Original weather station Data</h6></p>
+            </div>
+           
+          </div>
+          <div class="row">
+            <div class="column">
+              <img src="img/idw.jpg" alt="Can" style="width:70%">
+              <p><h6 style="color: rgb(238, 10, 10);">IDW Interpolation Method (With default Distant Coefficient)</h6></p>
+            </div>
+            <div class="column">
+              <img src="img/idwC.jpg" alt="On" style="width:70%">
+              <p><h6 style="color: rgb(238, 10, 10);">Derived wind Results compared with the Original weather station Data</h6></p>
+            </div>
+           
+          </div>
    <div class="col-12"><h4 class="text-justify" style="color: rgb(42, 165, 69);">PYQGIS </h4></div>
     <p class="text-justify">
       PyQGIS is a framework that allows you to run QGIS processes in python. To run QGIS processes in python, 
@@ -111,12 +166,12 @@
         <p class="text-justify">
           The web application displays current weather information, wind speed, visibility and cloud condition.
           The web appliction is hosted on GitHub thus querying the web server provided by the client would be impossible.
-          To remedy this, we retrieved weather data from openweathermap using the api provided by openweathermap.org. The Open weather Map is a featureopn-source weather 
+          To remedy this, we retrieved weather data from openweathermap using the api provided by openweathermap.org. The Open weather Map API is a featureopn-source weather 
           resource and comes in as a valid replacement with high accuracy. The web apllication queries openweathermap.org using jQuery, supplying
           coordinates of the clicked points on the map, in turn retrieveing weather information for the clicked point. This process 
-          happens really fast. The map pane displays the user's current location onLoad, has a searchbar as well as a selection
+          happens really fast. The map pane displays the user's current location onLoad, has a searchcbar as well as a selection
           pane where map type, weather condition of interest could be chosen. These features are overlain on an Open Street Map 
-          base map which is a free and open source base map.
+          base map which is a free and open source base map. Leaflet javascript was made use of to build this map.
         </p>
 
         
