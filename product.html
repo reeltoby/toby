@@ -183,7 +183,7 @@ crossorigin="">
      <a class="nav-link" href="index.html"><strong> Home </strong></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="method.html"><strong> Methodology </strong></a>
+            <a class="nav-link" href="method.html"><strong> Work Done </strong></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="inter.html"><strong> Interpolation </strong></a>
@@ -286,14 +286,14 @@ map.on('click', function(layer){
 		  var latlng = map.mouseEventToLatLng(layer.originalEvent);
 		  console.log(latlng.lat + ', ' + latlng.lng);
 		  //alert(latlng.lat + ' , ' + latlng.lng);
-		  $.get( "https://api.openweathermap.org/data/2.5/weather?units=metric&lat="+latlng.lat+"&lon="+latlng.lng+"&appid=35b79f04000d801c24276115e7093f38", function( data ) {
+		  $.get( "https://api.openweathermap.org/data/2.5/weather?units=metric&lat="+latlng.lat+"&lon="+latlng.lng+"&appid=6a7e01daf992d16cd943dae3b79d1550", function( data ) {
 			  console.log(data);
 			  var weatherdata = JSON.stringify(data);
-			  //alert( "Data Loaded: " + weatherdata );
+		
 
 			  var obj = JSON.parse(weatherdata);
 			  
-			  // returning json values help: https://idratherbewriting.com/learnapidoc/docapis_access_json_values.html
+			
 		
 			  document.getElementById("start").innerHTML = 
         "Coordinates: " + latlng.lat.toFixed(5) + ', ' + latlng.lng.toFixed(5) + "<br />" +
@@ -304,8 +304,7 @@ map.on('click', function(layer){
         "Wind Speed: " + obj.wind.gust + " km/h";
 
 			  document.getElementById("temperature").innerHTML = "Temperature: " + Math.round (obj.main.feels_like) + " °C";
-			  document.getElementById("temperature").style.fontSize = 35;
-			  document.getElementById("temperature").style.fontFamily = "Arial";
+			  
 		
 		
 			});
