@@ -140,6 +140,26 @@
             </div>
            
           </div>
+          <div class="row">
+            <div class="column">
+              <img src="img/idwp8.jpg" alt="Can" style="width:70%">
+              <p><h6 style="color: rgb(238, 10, 10);">IDW Interpolation Method (With default Coefficient set to 8)</h6></p>
+            </div>
+            <div class="column">
+              <img src="img/idwp8C.jpg" alt="On" style="width:70%">
+              <p><h6 style="color: rgb(238, 10, 10);">Derived wind Results compared with the Original weather station Data</h6></p>
+            </div>
+           
+          </div>
+          <p class="text-justify">
+            Overall, IDWP8 and Nearest neighbour seemed to be the most accurate. Nearest neighbour defaulted in 
+            its accuracy for unknown points as it just picks and displays the data from the nearest weather station. The results
+            derived by the nearest neighbour interpolation method for unknown points were highly inaccurate.
+            The IDW in its default stae was not as accurate as the when the Coefficient Distant parameter was set to 8.
+            At the mode, we achieved the highest accuracy and agreed to go along with this interpolation method and embedded 
+            it into the python script.
+      
+          </p>
    <div class="col-12"><h4 class="text-justify" style="color: rgb(42, 165, 69);">PYQGIS </h4></div>
     <p class="text-justify">
       PyQGIS is a framework that allows you to run QGIS processes in python. To run QGIS processes in python, 
@@ -157,11 +177,11 @@
       go about this.
 
     </p>
-    <img alt ='IDW' src="img/IDW.png" style="margin-left: auto; margin-right: auto;" ></br>
+    
     
     
     <div class="col-12">
-      <p><h6 style="color: rgb(238, 10, 10);">Image showing Ontario divided into nine different regions</h6></p>
+      
         <h4 class="text-justify" style="color: rgb(42, 165, 69);"> WEB DEVELOPMENT  </h4></div>
         <p class="text-justify">
           The web application displays current weather information, wind speed, visibility and cloud condition.
