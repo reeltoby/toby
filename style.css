@@ -236,7 +236,19 @@ button[type="submit"]:hover{
   margin: 0 auto;
   border-radius: 8px;
 }
-
+.row {
+  display: flex;
+}
+.column {
+  
+  flex: 33.33%;
+  padding: 5px;
+}
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
 #status.success{
   background-color: chartreuse;
   animation: status 4s ease delay forwards;

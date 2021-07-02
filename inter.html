@@ -48,12 +48,24 @@
     <h2 class="text-center" style="color: brown;">Methodology: How we did it</h2></div>
     <div class="col-12"> <h4 class="text-justify" style="color: rgb(42, 165, 69);">PREPARING THE STUDY AREA </h4></div>
     <h5 style="color: rgb(165, 46, 42);" >Weather Stations:</h5>
-    <p class="text-justify">Weather stations within Ontario and a 50km 
-      distance from the borders of Ontario were clipped for inclusion in the study area. 
-      The weather stations within 50km outside of the Ontario border were included 
-      in the study area to improve interpolation results near the edges of Ontario near Manitoba and Quebec.
-         </p>
-
+    <p class="text-justify">Downloaded the entire weather stations data of Canada from 
+        Google as a KML file (https://www.google.com/maps/d/viewer?msa=0&dg=feature&mid=1zXdPVrRpsXd37wTN3nzcF
+        fCQgdE&ll=47.12315462087478%2C-78.23151418166714&z=5) then exported our study area as a layer on its own.
+        This Layer was then brough to the map and clipped with the weather stations data to extract the weather stations in 
+        Ontario.
+    </p>
+         <div class="row">
+            <div class="column">
+              <img src="img/canWeather.jpg" alt="Can" style="width:100%">
+              <p><h6 style="color: rgb(238, 10, 10);">Weather stations all around Canada</h6></p>
+            </div>
+            <div class="column">
+              <img src="img/onWeatherClipped.jpg" alt="On" style="width:100%">
+              <p><h6 style="color: rgb(238, 10, 10);">Clipped Weather ststions in Ontario</h6></p>
+            </div>
+           
+          </div>
+     
          <h5 class="text-justify" style="color: rgb(165, 46, 42);">Map tiles: </h5>
          <p class="text-justify"> We created raster files automatically, using python scripts. 
           After discovering that we could not query raster in Leaflet to fulfill our project purpose, 
