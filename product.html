@@ -299,7 +299,7 @@ map.on('click', function(layer){
         "Feels like: " + Math.round (obj.main.feels_like) + " °C" + "<br />" + 
         "Cloud: "  + obj.weather[0].description + "<br />" + 
         "Visibility: " + obj.visibility + " m" + "<br />" + 
-        "Wind Speed: " + obj.wind.gust + " km/h";
+        "Wind Speed: " + obj.wind.speed + " m/h";
 
 			  document.getElementById("temperature").innerHTML = "Temperature: " + Math.round (obj.main.feels_like) + " °C";
 			  
