@@ -45,7 +45,7 @@
 <div class="container-sm border ">
     <div class="row welcome text-center">
       <div class="col-12">
-    <h2 class="text-center" style="color: brown;">Methodology: Whats was done</h2></div>
+    <h2 class="text-center" style="color: brown;">Methodology: What was done</h2></div>
     <div class="col-12"> <h4 class="text-justify" style="color: rgb(42, 165, 69);">PREPARING THE STUDY AREA </h4></div>
     <h5 style="color: rgb(165, 46, 42);" >Weather Stations:</h5>
     <p class="text-justify">Downloaded the entire weather stations data of Canada from 
@@ -61,22 +61,19 @@
             </div>
             <div class="column">
               <img src="img/onWeatherClipped.jpg" alt="On" style="width:70%">
-              <p><h6 style="color: rgb(238, 10, 10);">Clipped Weather ststions in Ontario</h6></p>
+              <p><h6 style="color: rgb(238, 10, 10);">Clipped Weather stations in Ontario</h6></p>
             </div>
            
           </div>
      
-         <h5 class="text-justify" style="color: rgb(165, 46, 42);">Map tiles: </h5>
-         <p class="text-justify"> We created raster files automatically, using python scripts. 
-          After discovering that we could not query raster in Leaflet to fulfill our project purpose, 
-          we resolved to convert the raster to GeoJSON files which would then be used to query for temperature and wind speed information in the mapping application.</br>
-          Rectangle tiles were created in QGIS using the create grid tool. Setting horizontal and vertical spacing to 0.4 degrees
-          ,and the extent was set to –100,0,0,60 (left, right, bottom, top). 
-          Point grid tiles were also created, with horizontal and vertical spacing set to 
-          0.04 degrees and the extent set to –100.02, 0.02, 0.02, 60.02. 
-          The 0.02 was added to the point extents to offset their locations not to overlap the rectangle grids. </br>
-          The goal here was to have GeoJSON files for each respective tile, and each of those files would hold the points that fall within the extents of that tile. Each GeoJSON files' name was the extent of the corresponding rectangle tile concatenated with a "G" in front. These rectangle points and grids were then spatially joined to have the grid tile name added to 
-          the point grid layer, splitting the vector layers into separate GeoJSON files according to the grid tile name every hour.
+         <h5 class="text-justify" style="color: rgb(165, 46, 42);">Weather Data Download: </h5>
+         <p class="text-justify"> We automated the download of weather data according to weather stations in Ontario,
+             extracting the data and stored them in PostGIS postgresql
+             databse. This data contains other information and details like precipitation, humidity, but 
+             our main focus is on wind speed and temperature. The information automatically saved in the database 
+             has temperature and wind speed record for all the weather stations in Ontario. The database was then connected
+             to QGIS and the data brought over as a layer for spatial analysis to decipher the best interpolation methods.
+             
            </p>
     
     <div class="col-12"><h4 class="text-justify" style="color: rgb(42, 165, 69);" > RETRIEVING THE RAW WEATHER DATA </h4></div>

@@ -303,7 +303,16 @@ map.on('click', function(layer){
 
 			  document.getElementById("temperature").innerHTML = "Temperature: " + Math.round (obj.main.feels_like) + " °C";
 			  
-		
+		    // get a new date (locale machine date time)
+        var date = new Date();
+      // get the date as a string
+      var n = date.toDateString();
+      // get the time as a string
+      var time = date.toLocaleTimeString();
+
+        // find the html element with the id of time
+      // set the innerHTML of that element to the date a space the time
+      document.getElementById('time').innerHTML = n + ' ' + time;
 		
 			});
 		});
@@ -327,7 +336,9 @@ map.on('click', function(layer){
     <div>
       <p id="start" style=" color:rgb(14, 2, 2); font-size:1vw;"></p>
       </div>
+      
     <div id="temperature" style=" color:rgb(199, 8, 8); font-size:2.5vw;"> </div>
+    <div id='time' style=" color:rgb(12, 22, 161);font-size:1.5vw;"></div>
     </div>
     
   </div>
