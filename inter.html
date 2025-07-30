@@ -66,12 +66,12 @@
           </div>
      
          <h5 class="text-justify" style="color: rgb(165, 46, 42);">Weather Data Download: </h5>
-         <p class="text-justify"> We automated the download of weather data according to weather stations in Ontario,
+         <p class="text-justify"> I automated the download of weather data according to weather stations in Ontario,
              extracting the data and stored them in PostGIS postgresql
              databse. This data contains other information and details like precipitation, humidity, but 
-             our main focus is on wind speed and temperature. The information automatically saved in the database 
-             has temperature and wind speed record for all the weather stations in Ontario. A coonection was then established from
-             QGIS destop application to the postgresql databse on our desktop and the data brought over as a layer for spatial analysis to decipher the best interpolation methods.
+             my main focus is on wind speed and temperature. The information automatically saved in the database 
+             has temperature and wind speed record for all the weather stations in Ontario. A connection was then established from
+             QGIS destop application to the postgresql databse on my desktop and the data brought over as a layer for spatial analysis to decipher the best interpolation methods.
              This connection process led to installation of Geoserver(using apache tomcat) and postgresql in the web server hoping this 
              would work seamlessly.
 
@@ -81,7 +81,7 @@
      
     <h5 style="color: rgb(165, 46, 42);" >Interpolation Methods: </h5>
     <p class="text-justify">
-    Several interpolation methods were considered and tested for accuracy. We agreed on testing TIN, B-Spline, IDW, Natural Neighbour
+    Several interpolation methods were considered and tested for accuracy. I decided on testing TIN, B-Spline, IDW, Natural Neighbour
     and Nearest Neighbour
 
     </p>
@@ -161,7 +161,7 @@
             its accuracy for unknown points as it just picks and displays the data from the nearest weather station. The results
             derived by the nearest neighbour interpolation method for unknown points were highly inaccurate.
             The IDW in its default stae was not as accurate as the when the Coefficient Distant parameter was set to 8.
-            At the mode, we achieved the highest accuracy and agreed to go along with this interpolation method and embedded 
+            At the mode, I achieved the highest accuracy and agreed to go along with this interpolation method and embedded 
             it into the python script.
       
           </p>
@@ -169,16 +169,16 @@
     <p class="text-justify">
       PyQGIS is a framework that allows you to run QGIS processes in python. To run QGIS processes in python, 
       we needed to set our python interpreter to the python-qgis.bat interpreter. The pyQGIS would not connect to postgresql
-      database to pull data for interpolation as we tried several methods and sough online helps. 
+      database to pull data for interpolation as I tried several methods and sough online helps. 
 
     </p>
     
     
    <div class="col-12"><h4 class="text-justify" style="color: rgb(42, 165, 69);"> BATCH FILE</h4></div>
     <p class="text-justify">
-      We set up a batchfile to automatically run python scripts and download the current weather data from
+      I set up a batchfile to automatically run python scripts and download the current weather data from
       the government of Canada website. This would the carry out the interpolation and store the data in the server
-      We faced challenges with this and had to consult or client for possible solutions on how to
+      I faced challenges with this and had to inform the client of possible other solutions on how to
       go about this.
 
     </p>
@@ -191,7 +191,7 @@
         <p class="text-justify">
           The web application displays current weather information, wind speed, visibility and cloud condition.
           The web appliction is hosted on GitHub thus querying the web server provided by the client would be impossible.
-          To remedy this, we retrieved weather data from openweathermap using the api provided by <a target="_blank" href="https://openweathermap.org/">openweathermap.org</a>. The Open weather Map API is a featureopn-source weather 
+          To remedy this, I retrieved weather data from openweathermap using the api provided by <a target="_blank" href="https://openweathermap.org/">openweathermap.org</a>. The Open weather Map API is a featureopn-source weather 
           resource and comes in as a valid replacement with high accuracy. The web apllication queries openweathermap.org using jQuery, supplying
           coordinates of the clicked points on the map, in turn retrieveing weather information for the clicked point. This process 
           happens really fast. The map pane displays the user's current location onLoad, has a searchcbar as well as a selection
